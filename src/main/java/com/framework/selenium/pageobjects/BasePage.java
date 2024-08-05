@@ -14,6 +14,7 @@ public class BasePage {
     WebDriverWait wait;
 
     By cartHeader = By.xpath("//button[@routerlink='/dashboard/cart']");
+    By ordersHeader = By.xpath("//button[@routerlink='/dashboard/myorders']");
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -48,5 +49,10 @@ public class BasePage {
     public CartPage navigateToCart() {
         clickElement(cartHeader);
         return new CartPage(driver);
+    }
+
+    public OrderHistoryPage navigateToOrdersPage(){
+        clickElement(ordersHeader);
+        return new OrderHistoryPage(driver);
     }
 }

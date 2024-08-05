@@ -1,28 +1,17 @@
 package com.framework.selenium.tests;
 
 import com.framework.selenium.pageobjects.*;
-import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.Test;
 
-import java.time.Duration;
-import java.util.List;
+import java.io.IOException;
 
-public class OrderTest {
-    public static void main(String[] args) {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+public class OrderTest extends BaseTest {
+    @Test
+    public void placeOrderTest() throws IOException {
         String productName = "ADIDAS ORIGINAL";
         String expectedConfirmMessage = "THANKYOU FOR THE ORDER.";
 
-        LoginPage loginPage = new LoginPage(driver);
         loginPage.goToLoginPage();
         ShopPage shopPage = loginPage.login("nikhil.p.kottary@gmail.com", "$Sel12345");
 
@@ -38,7 +27,16 @@ public class OrderTest {
 
         String confirmMessage = confirmationPage.getConfirmationMessage();
         Assert.assertEquals(confirmMessage, expectedConfirmMessage);
+    }
 
-        driver.close();
+    @Test(dependsOnMethods = {"placeOrderTest"})
+    public void verifyOrdersHistory(){
+        String productName = "ADIDAS ORIGINAL";
+
+        loginPage.goToLoginPage();
+        ShopPage shopPage = loginPage.login("nikhil.p.kottary@gmail.com", "$Sel12345");
+
+        OrderHistoryPage orderHistoryPage=shopPage.navigateToOrdersPage();
+        Assert.assertTrue(orderHistoryPage.verifyOrdersDisplay(productName));
     }
 }

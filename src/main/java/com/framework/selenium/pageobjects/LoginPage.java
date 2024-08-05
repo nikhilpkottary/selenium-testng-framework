@@ -8,6 +8,7 @@ public class LoginPage extends BasePage {
     By emailTxt = By.id("userEmail");
     By passwordTxt = By.id("userPassword");
     By loginBtn = By.id("login");
+    By incorrectLoginErrorLocator=By.cssSelector("#toast-container");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -23,4 +24,11 @@ public class LoginPage extends BasePage {
         clickElement(loginBtn);
         return new ShopPage(driver);
     }
+
+    public String getLoginErrorMessage(){
+        waitForVisibilityOfElement(incorrectLoginErrorLocator);
+        return getText(incorrectLoginErrorLocator);
+    }
+
+
 }

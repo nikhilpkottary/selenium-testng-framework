@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite parallel="tests" thread-count="2" name="TestSuite">
+    <test name="Place Order Test">
+        <classes>
+            <class name="com.framework.selenium.tests.OrderTest"></class>
+        </classes>
+    </test>
+    <test name="Error Validation Tests">
+        <classes>
+            <class name="com.framework.selenium.tests.ErrorValidationTests"></class>
+        </classes>
+    </test>
+</suite>
