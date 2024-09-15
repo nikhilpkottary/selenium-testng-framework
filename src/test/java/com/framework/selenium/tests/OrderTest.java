@@ -13,7 +13,7 @@ public class OrderTest extends BaseTest {
         String expectedConfirmMessage = "THANKYOU FOR THE ORDER.";
 
         loginPage.goToLoginPage();
-        ShopPage shopPage = loginPage.login("nikhil.p.kottary@gmail.com", "$Sel12345");
+        ShopPage shopPage = loginPage.login("shoppinguser@gmail.com","$Test123");
 
         shopPage.addToCart(productName);
         CartPage cartPage = shopPage.navigateToCart();
@@ -34,7 +34,7 @@ public class OrderTest extends BaseTest {
         String productName = "ADIDAS ORIGINAL";
 
         loginPage.goToLoginPage();
-        ShopPage shopPage = loginPage.login("nikhil.p.kottary@gmail.com", "$Sel12345");
+        ShopPage shopPage = loginPage.login("shoppinguser@gmail.com","$Test123");
 
         OrderHistoryPage orderHistoryPage=shopPage.navigateToOrdersPage();
         Assert.assertTrue(orderHistoryPage.verifyOrdersDisplay(productName));
